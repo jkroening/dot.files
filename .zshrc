@@ -27,7 +27,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-source .antigen/antigen.zsh
+source ~/dot.files/.antigen/antigen.zsh
 antigen apply
 
 ## pyenv autocompletion
