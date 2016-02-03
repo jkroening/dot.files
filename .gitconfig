@@ -1,1 +1,26 @@
-.gitconfig
+[user]
+	name = Jonathan Kroening
+	email = jonathan.kroening@ipsos.com
+[push]
+	default = simple
+[alias]
+        lg = log --oneline --all --graph --decorate
+        st = status
+	co = checkout
+	cm = commit
+	ps = push
+	pl = pull
+	aa = add . -A
+	atch = "!clear;inotifywait --quiet -mr -e modify,move,create,delete --format \"%f %e\" @/.git . | \
+      	while read file; do \
+          	clear;\
+          	git status --short;\
+          	git --no-pager diff --shortstat;\
+      	done;"
+[merge]
+	tool = emerge
+[filter "gitignore"]
+	clean = "sed '/#gitignore$/'d"
+	smudge = cat
+[diff "excel"]
+	command = excel_diff
