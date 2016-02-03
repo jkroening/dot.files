@@ -4,3 +4,6 @@
 [submodule ".antigen"]
 	path = .antigen
 	url = https://github.com/zsh-users/antigen.git
+[submodule "zsh-themes"]
+	path = zsh-themes
+	url = https://github.com/jkroening/zsh-themes.git

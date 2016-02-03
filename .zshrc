@@ -11,23 +11,20 @@ bindkey -e
 # The following lines were added by compinstall
 zstyle :compinstall filename '/Users/jonathan.kroening/.zshrc'
 
-# Theme
-ZSH_THEME="jkroen"
-
-source $ZSH/oh-my-zsh.sh
-
-plugins=(git
-	brew 
-	npm
-	osx
-	python
-	emacs)
-
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
 source ~/dot.files/.antigen/antigen.zsh
+
+antigen use oh-my-zsh
+antigen theme jkroening/zsh-themes jkroen
+antigen bundle git
+antigen bundle brew
+antigen bundle npm
+antigen bundle osx
+antigen bundle python
+antigen bundle emacs
 antigen apply
 
 ## pyenv autocompletion
