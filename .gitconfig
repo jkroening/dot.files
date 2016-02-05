@@ -24,3 +24,5 @@
 	smudge = cat
 [diff "excel"]
 	command = excel_diff
+[core]
+	editor = vim
