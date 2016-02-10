@@ -15,7 +15,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-source ~/dot.files/.antigen/antigen.zsh
+source ~/.dot.files/.antigen/antigen.zsh
 
 antigen use oh-my-zsh
 antigen theme jkroening/zsh-themes jkroen
@@ -26,6 +26,10 @@ antigen bundle osx
 antigen bundle python
 antigen bundle emacs
 antigen apply
+
+## aliases
+alias tronmode='osascript ~/.dot.files/zsh-themes/term-theme.scpt TronTerm'
+alias thematrix='osascript ~/.dot.files/term-theme.scpt "The Matrix"'
 
 ## pyenv autocompletion
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
