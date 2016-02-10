@@ -244,15 +244,50 @@ in `dotspacemacs/user-config'."
                             (bg1 . "#1c1e20")
                             (bg2 . "#17161a")
                             (bg4 . "#5d4e79")
-                            (comment-bg . "#202429"))))
+                            (comment-bg . "#171e26"))))
   )
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
-  )
+  (with-eval-after-load 'ess
+    (add-to-list 'ess-style-alist '(my-RStudio
+                                    (ess-indent-offset . 4)
+                                    (ess-offset-arguments . open-delim)
+                                    (ess-offset-arguments-newline . prev-line)
+                                    (ess-offset-block . prev-line)
+                                    (ess-offset-continued . straight)
+                                    (ess-align-nested-calls)
+                                    (ess-align-arguments-in-calls "function[ 	]*(")
+                                    (ess-align-continuations-in-calls)
+                                    (ess-align-blocks)
+                                    (ess-indent-from-lhs arguments)
+                                    (ess-indent-from-chain-start . t)
+                                    (ess-indent-with-fancy-comments)
+                                    (ess-toggle-underscore . nil)))
+    (add-hook 'ess-mode-hook (lambda () (ess-set-style 'my-RStudio)))
+    )
 
+  ;; toggles
+  (spacemacs/toggle-smartparens-globally-on)
+  (spacemacs/toggle-aggressive-indent-globally-on)
+  (spacemacs/toggle-line-numbers-on)
+
+  ;; user functions
+  (defun comment-or-uncomment-region-or-line ()
+    "Comments or uncomments the region or the current line if there's no active region."
+    (interactive)
+    (let (beg end)
+      (if (region-active-p)
+          (setq beg (region-beginning) end (region-end))
+        (setq beg (line-beginning-position) end (line-end-position)))
+      (comment-or-uncomment-region beg end)
+      (next-line)))
+
+  ;; user keys
+  (bind-key (kbd "M-/") 'comment-or-uncomment-region-or-line)
+  )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
