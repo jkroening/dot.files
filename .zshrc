@@ -29,7 +29,7 @@ antigen apply
 
 ## aliases
 alias tronmode='osascript ~/.dot.files/zsh-themes/term-theme.scpt TronTerm'
-alias thematrix='osascript ~/.dot.files/term-theme.scpt "The Matrix"'
+alias thematrix='osascript ~/.dot.files/zsh-themes/term-theme.scpt "The Matrix"'
 
 ## pyenv autocompletion
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
