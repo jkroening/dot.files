@@ -27,9 +27,15 @@ antigen bundle python
 antigen bundle emacs
 antigen apply
 
+## Go
+export GOPATH=~/Work/Repos/go/
+export PATH=$GOPATH/packages/bin:$PATH
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+
 ## aliases
 alias tronmode='osascript ~/.dot.files/zsh-themes/term-theme.scpt TronTerm'
 alias thematrix='osascript ~/.dot.files/zsh-themes/term-theme.scpt "The Matrix"'
+alias lsk='ls -hoag'
 
 ## pyenv autocompletion
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
