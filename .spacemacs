@@ -18,6 +18,12 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     go
+     html
+     yaml
+     javascript
+     csv
+     python
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -28,7 +34,7 @@ values."
      emacs-lisp
      ess
      git
-     ;; markdown
+     markdown
      ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -167,7 +173,7 @@ values."
    dotspacemacs-helm-position 'bottom
    ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
    ;; several times cycle between the kill ring content. (default nil)
-   dotspacemacs-enable-paste-micro-state nil
+   dotspacemacs-enable-paste-micro-state t
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
    dotspacemacs-which-key-delay 0.4
@@ -231,7 +237,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup 'trailing
    ))
 
 (defun dotspacemacs/user-init ()
@@ -251,7 +257,7 @@ in `dotspacemacs/user-config'."
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
-  (with-eval-after-load 'ess
+  (with-eval-after-load 'ess-site
     (add-to-list 'ess-style-alist '(my-RStudio
                                     (ess-indent-offset . 4)
                                     (ess-offset-arguments . open-delim)
@@ -259,14 +265,15 @@ layers configuration. You are free to put any user code."
                                     (ess-offset-block . prev-line)
                                     (ess-offset-continued . straight)
                                     (ess-align-nested-calls)
-                                    (ess-align-arguments-in-calls "function[ 	]*(")
+                                    (ess-align-arguments-in-calls "function[  ]*(")
                                     (ess-align-continuations-in-calls)
                                     (ess-align-blocks)
                                     (ess-indent-from-lhs arguments)
                                     (ess-indent-from-chain-start . t)
                                     (ess-indent-with-fancy-comments)
-                                    (ess-toggle-underscore . nil)))
+                                    ))
     (add-hook 'ess-mode-hook (lambda () (ess-set-style 'my-RStudio)))
+    (ess-toggle-underscore nil)
     )
 
   ;; toggles
