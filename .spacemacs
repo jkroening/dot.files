@@ -298,6 +298,10 @@ layers configuration. You are free to put any user code."
 
   ;; user keys
   (bind-key (kbd "M-/") 'comment-or-uncomment-region-or-line)
+  (setq mac-option-key-is-meta nil
+        mac-command-key-is-meta t
+        mac-command-modifier 'meta
+        mac-option-modifier 'none)
   )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
