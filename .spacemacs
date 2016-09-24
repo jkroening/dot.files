@@ -251,6 +251,10 @@ in `dotspacemacs/user-config'."
                             (bg2 . "#17161a")
                             (bg4 . "#5d4e79")
                             (comment-bg . "#171e26"))))
+  ;; slow down the scroll!
+  (setq mouse-wheel-scroll-amount '(1 ((shift). 1)))
+  (global-set-key (kbd "s-1") 'select-window-1)
+  (global-set-key (kbd "s-2") 'select-window-2)
   )
 
 (defun dotspacemacs/user-config ()
@@ -308,7 +312,17 @@ layers configuration. You are free to put any user code."
    ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(custom-safe-themes
    (quote
-    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))))
+    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
+ '(package-selected-packages
+   (quote
+    (undo-tree s web-mode persp-mode org-plus-contrib neotree js2-refactor help-fns+ helm-themes helm-pydoc helm-descbinds helm-ag evil-unimpaired ace-jump-helm-line ess iedit smartparens projectile helm markdown-mode magit git-commit yasnippet yapfify yaml-mode ws-butler with-editor window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort popwin pkg-info pip-requirements pcre2el paradox orgit org-bullets open-junk-file multiple-cursors move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode julia-mode json-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-css-scss helm-core google-translate golden-ratio go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu ess-smart-equals ess-R-object-popup ess-R-data-view emmet-mode elisp-slime-nav dumb-jump define-word cython-mode csv-mode column-enforce-mode coffee-mode clean-aindent-mode auto-highlight-symbol auto-compile anaconda-mode aggressive-indent adaptive-wrap ace-window ace-link)))
+ '(spacemacs-theme-custom-colors
+   (quote
+    ((base . "#cccccc")
+     (bg1 . "#1c1e20")
+     (bg2 . "#17161a")
+     (bg4 . "#5d4e79")
+     (comment-bg . "#171e26")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
