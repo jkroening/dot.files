@@ -252,7 +252,12 @@ in `dotspacemacs/user-config'."
                             (bg4 . "#5d4e79")
                             (comment-bg . "#171e26"))))
   ;; slow down the scroll!
-  (setq mouse-wheel-scroll-amount '(1 ((shift). 1)))
+  (setq scroll-step 1)
+  (setq scroll-conservatively 10000)
+  (setq auto-window-vscroll nil)
+  (setq mouse-wheel-scroll-amount '(3 ((shift). 1))) ;; one line at a time
+  (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+  ;; window jumping
   (global-set-key (kbd "s-1") 'select-window-1)
   (global-set-key (kbd "s-2") 'select-window-2)
   )
