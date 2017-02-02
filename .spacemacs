@@ -18,6 +18,7 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     windows-scripts
      go
      html
      yaml
@@ -105,7 +106,13 @@ values."
    dotspacemacs-themes '(spacemacs-dark
                          spacemacs-light
                          solarized-light
-                         solarized-dark
+                         go
+     html
+     yaml
+     javascript
+     csv
+     python
+     ;; ------solarized-dark
                          leuven
                          monokai
                          zenburn)
@@ -114,7 +121,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -245,12 +252,6 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
 any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
-  (custom-set-variables '(spacemacs-theme-custom-colors
-                          '((base . "#cccccc")
-                            (bg1 . "#1c1e20")
-                            (bg2 . "#17161a")
-                            (bg4 . "#5d4e79")
-                            (comment-bg . "#171e26"))))
   ;; slow down the scroll!
   ;; (setq scroll-step 1)
   ;; (setq scroll-conservatively 10000)
@@ -260,6 +261,7 @@ in `dotspacemacs/user-config'."
   ;; window jumping
   (global-set-key (kbd "s-1") 'select-window-1)
   (global-set-key (kbd "s-2") 'select-window-2)
+  (global-set-key (kbd "s-3") 'select-window-3)
 )
 
 (defun dotspacemacs/user-config ()
@@ -315,6 +317,12 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(spacemacs-theme-custom-colors
+   '((base . "#cccccc")
+     (bg1 . "#1c1e20")
+     (bg2 . "#17161a")
+     (bg4 . "#5d4e79")
+     (comment-bg . "#171e26")))
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
@@ -338,3 +346,37 @@ layers configuration. You are free to put any user code."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
+ '(custom-safe-themes
+   (quote
+    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
+ '(package-selected-packages
+   (quote
+    (powershell tern powerline spinner hydra request skewer-mode org highlight dash anzu go-mode magit-popup async f js2-mode undo-tree s web-mode persp-mode org-plus-contrib neotree js2-refactor help-fns+ helm-themes helm-pydoc helm-descbinds helm-ag evil-unimpaired ace-jump-helm-line ess iedit smartparens projectile helm markdown-mode magit git-commit yasnippet yapfify yaml-mode ws-butler with-editor window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort popwin pkg-info pip-requirements pcre2el paradox orgit org-bullets open-junk-file multiple-cursors move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode julia-mode json-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-css-scss helm-core google-translate golden-ratio go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu ess-smart-equals ess-R-object-popup ess-R-data-view emmet-mode elisp-slime-nav dumb-jump define-word cython-mode csv-mode column-enforce-mode coffee-mode clean-aindent-mode auto-highlight-symbol auto-compile anaconda-mode aggressive-indent adaptive-wrap ace-window ace-link)))
+ '(spacemacs-theme-custom-colors
+   (quote
+    ((base . "#cccccc")
+     (bg1 . "#1c1e20")
+     (bg2 . "#17161a")
+     (bg4 . "#5d4e79")
+     (comment-bg . "#171e26")))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)
