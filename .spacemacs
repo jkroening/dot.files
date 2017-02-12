@@ -106,13 +106,7 @@ values."
    dotspacemacs-themes '(spacemacs-dark
                          spacemacs-light
                          solarized-light
-                         go
-     html
-     yaml
-     javascript
-     csv
-     python
-     ;; ------solarized-dark
+                         ;; ------solarized-dark
                          leuven
                          monokai
                          zenburn)
