@@ -18,6 +18,8 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     sql
+     ansible
      windows-scripts
      go
      html
@@ -48,7 +50,9 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+                                      yafolding
+                                      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -106,13 +110,7 @@ values."
    dotspacemacs-themes '(spacemacs-dark
                          spacemacs-light
                          solarized-light
-                         go
-     html
-     yaml
-     javascript
-     csv
-     python
-     ;; ------solarized-dark
+                         ;; ------solarized-dark
                          leuven
                          monokai
                          zenburn)
@@ -287,10 +285,35 @@ layers configuration. You are free to put any user code."
     (ess-toggle-underscore nil)
     )
 
+  ;; isend
+  (add-to-list 'load-path "~/.dot.files/.emacs.d/elpa/isend-mode")
+  (require 'isend)
+
   ;; toggles
   (spacemacs/toggle-smartparens-globally-on)
   (spacemacs/toggle-aggressive-indent-globally-on)
   (spacemacs/toggle-line-numbers-on)
+
+  ;; user keys
+  (bind-key (kbd "M-/") 'comment-or-uncomment-region-or-line)
+  (setq mac-option-key-is-meta nil
+        mac-option-key-is-control nil
+        mac-command-key-is-meta t
+        mac-command-modifier 'meta ; make cmd key do Meta
+        mac-option-key-is-super t
+        mac-option-modifier 'super ; make opt key do Super
+        mac-control-modifier 'control ; make Control key do Control
+        ns-function-modifier 'hyper ; make Fn key do Hyper
+        )
+
+  ;; yafolding key binding
+  (require 'yafolding)
+  (define-key yafolding-mode-map (kbd "<C-S-return>") nil)
+  (define-key yafolding-mode-map (kbd "<C-M-return>") nil)
+  (define-key yafolding-mode-map (kbd "<C-return>") nil)
+  (define-key yafolding-mode-map (kbd "<C-M-s-return>") 'yafolding-toggle-all)
+  (define-key yafolding-mode-map (kbd "<M-s-return>") 'yafolding-hide-parent-element)
+  (define-key yafolding-mode-map (kbd "<s-return>") 'yafolding-toggle-element)
 
   ;; user functions
   (defun comment-or-uncomment-region-or-line ()
@@ -302,14 +325,8 @@ layers configuration. You are free to put any user code."
         (setq beg (line-beginning-position) end (line-end-position)))
       (comment-or-uncomment-region beg end)
       (next-line)))
-
-  ;; user keys
-  (bind-key (kbd "M-/") 'comment-or-uncomment-region-or-line)
-  (setq mac-option-key-is-meta nil
-        mac-command-key-is-meta t
-        mac-command-modifier 'meta
-        mac-option-modifier 'none)
   )
+
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
@@ -365,7 +382,8 @@ This function is called at the very end of Spacemacs initialization."
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(package-selected-packages
    (quote
-    (powershell tern powerline spinner hydra request skewer-mode org highlight dash anzu go-mode magit-popup async f js2-mode undo-tree s web-mode persp-mode org-plus-contrib neotree js2-refactor help-fns+ helm-themes helm-pydoc helm-descbinds helm-ag evil-unimpaired ace-jump-helm-line ess iedit smartparens projectile helm markdown-mode magit git-commit yasnippet yapfify yaml-mode ws-butler with-editor window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort popwin pkg-info pip-requirements pcre2el paradox orgit org-bullets open-junk-file multiple-cursors move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode julia-mode json-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-css-scss helm-core google-translate golden-ratio go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu ess-smart-equals ess-R-object-popup ess-R-data-view emmet-mode elisp-slime-nav dumb-jump define-word cython-mode csv-mode column-enforce-mode coffee-mode clean-aindent-mode auto-highlight-symbol auto-compile anaconda-mode aggressive-indent adaptive-wrap ace-window ace-link)))
+    (evil-vimish-fold vimish-fold fold-this origami window-purpose discover makey yafolding folding password-generator godoctor evil-lion editorconfig symon string-inflection go-rename go-guru diminish sql-indent winum helm-ispell evil avy haml-mode imenu-list pug-mode hide-comnt helm-purpose packed simple-httpd zenburn-theme solarized-theme monokai-theme powershell tern powerline spinner hydra request skewer-mode org highlight dash anzu go-mode magit-popup async f js2-mode undo-tree s web-mode persp-mode org-plus-contrib neotree js2-refactor help-fns+ helm-themes helm-pydoc helm-descbinds helm-ag evil-unimpaired ace-jump-helm-line ess iedit smartparens projectile helm markdown-mode magit git-commit yasnippet yapfify yaml-mode ws-butler with-editor window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort popwin pkg-info pip-requirements pcre2el paradox orgit org-bullets open-junk-file multiple-cursors move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode julia-mode json-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-css-scss helm-core google-translate golden-ratio go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu ess-smart-equals ess-R-object-popup ess-R-data-view emmet-mode elisp-slime-nav dumb-jump define-word cython-mode csv-mode column-enforce-mode coffee-mode clean-aindent-mode auto-highlight-symbol auto-compile anaconda-mode aggressive-indent adaptive-wrap ace-window ace-link)))
+ '(safe-local-variable-values (quote ((org-ascii-text-width . 80))))
  '(spacemacs-theme-custom-colors
    (quote
     ((base . "#cccccc")
