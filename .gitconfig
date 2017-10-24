@@ -5,6 +5,7 @@
 	default = simple
 [alias]
         lg = log --oneline --all --graph --decorate
+        lga = log --oneline --all --graph --decorate git-annex..master
         st = status
 	co = checkout
 	cm = commit
@@ -26,3 +27,6 @@
 	command = excel_diff
 [core]
 	editor = vim
+	excludesfile = /Users/jonathan.kroening/.dot.files/.gitignore
+[credential]
+	helper = osxkeychain
