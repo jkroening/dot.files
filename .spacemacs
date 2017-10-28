@@ -51,7 +51,11 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
+                                      eval-in-repl
+                                      elpy
                                       yafolding
+                                      isend-mode
+                                      python-x
                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -285,9 +289,8 @@ layers configuration. You are free to put any user code."
     (ess-toggle-underscore nil)
     )
 
-  ;; isend
-  (add-to-list 'load-path "~/.dot.files/.emacs.d/elpa/isend-mode")
-  (require 'isend)
+  (python-x-setup)
+  (global-set-key (kbd "C-<return>") (lambda () (interactive) (python-shell-send-line) (next-line)))
 
   ;; toggles
   (spacemacs/toggle-smartparens-globally-on)
