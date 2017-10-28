@@ -19,5 +19,8 @@ export PATH=$GOPATH/packages/bin:$PATH
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 export PATH=$GOPATH/bin:$PATH
 
+## python via brew
+PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
 ## pyenv autocompletion
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
