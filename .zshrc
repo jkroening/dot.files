@@ -16,3 +16,6 @@ compinit
 alias tronmode='osascript ~/.dot.files/zsh-themes/term-theme.scpt TronTerm'
 alias thematrix='osascript ~/.dot.files/zsh-themes/term-theme.scpt "The Matrix"'
 alias lsk='ls -hoag'
+
+## python via brew
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
