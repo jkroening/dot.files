@@ -331,6 +331,11 @@ layers configuration. You are free to put any user code."
         (setq beg (line-beginning-position) end (line-end-position)))
       (comment-or-uncomment-region beg end)
       (next-line)))
+
+  ;; stop auto-paste when opening recent files
+  ;; https://github.com/syl20bnr/spacemacs/issues/5435
+  (add-hook 'spacemacs-buffer-mode-hook (lambda ()
+      (set (make-local-variable 'mouse-1-click-follows-link) nil)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
