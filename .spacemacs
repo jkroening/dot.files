@@ -254,6 +254,9 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
 any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
+  ;; stop warning about zshrc vs zshenv
+  (setq exec-path-from-shell-arguments '("-l"))
+
   ;; slow down the scroll!
   ;; (setq scroll-step 1)
   ;; (setq scroll-conservatively 10000)
