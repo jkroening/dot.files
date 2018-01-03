@@ -51,7 +51,11 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
+                                      eval-in-repl
+                                      elpy
                                       yafolding
+                                      isend-mode
+                                      python-x
                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -77,7 +81,7 @@ values."
    ;; (default t)
    dotspacemacs-elpa-https t
    ;; Maximum allowed time in seconds to contact an ELPA repository.
-   dotspacemacs-elpa-timeout 5
+   dotspacemacs-elpa-timeout 30
    ;; If non nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. (default t)
    dotspacemacs-check-for-update t
@@ -250,6 +254,9 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
 any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
+  ;; stop warning about zshrc vs zshenv
+  (setq exec-path-from-shell-arguments '("-l"))
+
   ;; slow down the scroll!
   ;; (setq scroll-step 1)
   ;; (setq scroll-conservatively 10000)
@@ -285,9 +292,8 @@ layers configuration. You are free to put any user code."
     (ess-toggle-underscore nil)
     )
 
-  ;; isend
-  (add-to-list 'load-path "~/.dot.files/.emacs.d/elpa/isend-mode")
-  (require 'isend)
+  (python-x-setup)
+  (global-set-key (kbd "C-<return>") (lambda () (interactive) (python-shell-send-line) (next-line)))
 
   ;; toggles
   (spacemacs/toggle-smartparens-globally-on)
@@ -325,6 +331,11 @@ layers configuration. You are free to put any user code."
         (setq beg (line-beginning-position) end (line-end-position)))
       (comment-or-uncomment-region beg end)
       (next-line)))
+
+  ;; stop auto-paste when opening recent files
+  ;; https://github.com/syl20bnr/spacemacs/issues/5435
+  (add-hook 'spacemacs-buffer-mode-hook (lambda ()
+      (set (make-local-variable 'mouse-1-click-follows-link) nil)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
