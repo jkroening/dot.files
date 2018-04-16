@@ -13,7 +13,7 @@ antigen bundle python
 antigen bundle emacs
 antigen apply
 
-# Go
+## Go
 export GOPATH=~/Repos/go/
 export PATH=$GOPATH/packages/bin:$PATH
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
