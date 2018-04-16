@@ -17,7 +17,7 @@ values."
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
-   '(
+   '(typescript
      sql
      ansible
      windows-scripts
@@ -25,6 +25,7 @@ values."
      html
      yaml
      javascript
+     react
      csv
      python
      ;; ----------------------------------------------------------------
@@ -257,6 +258,9 @@ in `dotspacemacs/user-config'."
   ;; stop warning about zshrc vs zshenv
   (setq exec-path-from-shell-arguments '("-l"))
 
+  ;; fix recentf mode lock
+  (setq create-lockfiles nil)
+
   ;; slow down the scroll!
   ;; (setq scroll-step 1)
   ;; (setq scroll-conservatively 10000)
@@ -291,6 +295,10 @@ layers configuration. You are free to put any user code."
     (add-hook 'ess-mode-hook (lambda () (ess-set-style 'my-RStudio)))
     (ess-toggle-underscore nil)
     )
+
+  (setq js2-basic-offset 4)
+  (setq sgml-basic-offset 4)
+  (setq js2-jsx-indent-line 4)
 
   (python-x-setup)
   (global-set-key (kbd "C-<return>") (lambda () (interactive) (python-shell-send-line) (next-line)))
@@ -331,6 +339,25 @@ layers configuration. You are free to put any user code."
         (setq beg (line-beginning-position) end (line-end-position)))
       (comment-or-uncomment-region beg end)
       (next-line)))
+
+  (defun js-jsx-indent-line-align-closing-bracket ()
+    "Workaround sgml-mode and align closing bracket with opening bracket"
+    (save-excursion
+      (beginning-of-line)
+      (when (looking-at-p "^ +\/?> *$")
+        (delete-char sgml-basic-offset))))
+  (advice-add #'js-jsx-indent-line :after #'js-jsx-indent-line-align-closing-bracket)
+
+  (setq-default indent-tabs-mode nil)
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+  (defun my-web-mode-hook ()
+    (setq web-mode-markup-indent-offset 4)
+    (setq web-mode-css-indent-offset 4)
+    (setq web-mode-code-indent-offset 4)
+    (setq web-mode-script-padding 4)
+    )
+  (with-eval-after-load 'web-mode (my-web-mode-hook))
 
   ;; stop auto-paste when opening recent files
   ;; https://github.com/syl20bnr/spacemacs/issues/5435
@@ -393,15 +420,15 @@ This function is called at the very end of Spacemacs initialization."
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(package-selected-packages
    (quote
-    (evil-vimish-fold vimish-fold fold-this origami window-purpose discover makey yafolding folding password-generator godoctor evil-lion editorconfig symon string-inflection go-rename go-guru diminish sql-indent winum helm-ispell evil avy haml-mode imenu-list pug-mode hide-comnt helm-purpose packed simple-httpd zenburn-theme solarized-theme monokai-theme powershell tern powerline spinner hydra request skewer-mode org highlight dash anzu go-mode magit-popup async f js2-mode undo-tree s web-mode persp-mode org-plus-contrib neotree js2-refactor help-fns+ helm-themes helm-pydoc helm-descbinds helm-ag evil-unimpaired ace-jump-helm-line ess iedit smartparens projectile helm markdown-mode magit git-commit yasnippet yapfify yaml-mode ws-butler with-editor window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort popwin pkg-info pip-requirements pcre2el paradox orgit org-bullets open-junk-file multiple-cursors move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode julia-mode json-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-css-scss helm-core google-translate golden-ratio go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu ess-smart-equals ess-R-object-popup ess-R-data-view emmet-mode elisp-slime-nav dumb-jump define-word cython-mode csv-mode column-enforce-mode coffee-mode clean-aindent-mode auto-highlight-symbol auto-compile anaconda-mode aggressive-indent adaptive-wrap ace-window ace-link)))
- '(safe-local-variable-values (quote ((org-ascii-text-width . 80))))
+    (tide typescript-mode flycheck elpy company editorconfig counsel ivy htmlize avy ghub evil tern powerline spinner hydra request skewer-mode org highlight dash anzu go-mode magit-popup async f js2-mode undo-tree s web-mode persp-mode org-plus-contrib neotree js2-refactor help-fns+ helm-themes helm-pydoc helm-descbinds helm-ag evil-unimpaired ace-jump-helm-line ess iedit smartparens projectile helm markdown-mode magit git-commit yasnippet yapfify yaml-mode ws-butler with-editor window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort popwin pkg-info pip-requirements pcre2el paradox orgit org-bullets open-junk-file multiple-cursors move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode julia-mode json-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-css-scss helm-core google-translate golden-ratio go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu ess-smart-equals ess-R-object-popup ess-R-data-view emmet-mode elisp-slime-nav dumb-jump define-word cython-mode csv-mode column-enforce-mode coffee-mode clean-aindent-mode auto-highlight-symbol auto-compile anaconda-mode aggressive-indent adaptive-wrap ace-window ace-link)))
  '(spacemacs-theme-custom-colors
    (quote
     ((base . "#cccccc")
      (bg1 . "#1c1e20")
      (bg2 . "#17161a")
      (bg4 . "#5d4e79")
-     (comment-bg . "#171e26")))))
+     (comment-bg . "#171e26"))))
+ '(web-mode-code-indent-offset 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
