@@ -30,3 +30,6 @@
 	excludesfile = /Users/jonathan.kroening/.dot.files/.gitignore
 [credential]
 	helper = osxkeychain
+[annex]
+	addunlocked = true
+	version = 6
