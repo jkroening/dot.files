@@ -277,6 +277,13 @@ in `dotspacemacs/user-config'."
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+  (require 'exec-path-from-shell)
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "PATH")
+  ;; These are used for savreaderwriter
+  (exec-path-from-shell-copy-env "DYLD_LIBRARY_PATH")
+  (exec-path-from-shell-copy-env "LC_ALL")
+
   (require 'helm)
   (with-eval-after-load 'ess-site
     (add-to-list 'ess-style-alist '(my-RStudio
