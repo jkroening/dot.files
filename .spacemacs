@@ -90,7 +90,7 @@ values."
    ;; variable is `emacs' then the `holy-mode' is enabled at startup. `hybrid'
    ;; uses emacs key bindings for vim's insert mode, but otherwise leaves evil
    ;; unchanged. (default 'vim)
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style 'hybrid
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
@@ -271,6 +271,10 @@ in `dotspacemacs/user-config'."
   (global-set-key (kbd "s-1") 'select-window-1)
   (global-set-key (kbd "s-2") 'select-window-2)
   (global-set-key (kbd "s-3") 'select-window-3)
+  (global-set-key (kbd "C-a") nil)
+  (global-set-key (kbd "C-a") 'beginning-of-line-text)
+  (global-set-key (kbd "C-e") nil)
+  (global-set-key (kbd "C-e") 'end-of-line)
 )
 
 (defun dotspacemacs/user-config ()
