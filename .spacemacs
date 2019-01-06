@@ -275,18 +275,32 @@ in `dotspacemacs/user-config'."
   (global-set-key (kbd "C-a") 'beginning-of-line-text)
   (global-set-key (kbd "C-e") nil)
   (global-set-key (kbd "C-e") 'end-of-line)
+  (progn(require 'comint)
+        (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
+        (define-key comint-mode-map (kbd "<down>") 'comint-next-input))
 )
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+  ;; have to disable ido mode since it doesn't play nice with helm
+  (ido-mode -1)
+  (xclip-mode 1)
+
   (require 'exec-path-from-shell)
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-env "PATH")
   ;; These are used for savreaderwriter
   (exec-path-from-shell-copy-env "DYLD_LIBRARY_PATH")
   (exec-path-from-shell-copy-env "LC_ALL")
+
+  (require 'isend-mode)
+  (setq isend-forward-line t)
+
+  (add-hook 'term-mode-hook
+            (lambda ()
+              (define-key term-raw-map (kbd "s-v") 'term-paste)))
 
   (require 'helm)
   (with-eval-after-load 'ess-site
@@ -312,6 +326,7 @@ layers configuration. You are free to put any user code."
   (setq sgml-basic-offset 4)
   (setq js2-jsx-indent-line 4)
 
+  (setq python-shell-interpreter "python27")
   (python-x-setup)
   (global-set-key (kbd "C-<return>") (lambda () (interactive) (python-shell-send-line) (next-line)))
 
@@ -374,7 +389,7 @@ layers configuration. You are free to put any user code."
   ;; stop auto-paste when opening recent files
   ;; https://github.com/syl20bnr/spacemacs/issues/5435
   (add-hook 'spacemacs-buffer-mode-hook (lambda ()
-      (set (make-local-variable 'mouse-1-click-follows-link) nil)))
+    (set (make-local-variable 'mouse-1-click-follows-link) nil)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -393,7 +408,7 @@ layers configuration. You are free to put any user code."
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(package-selected-packages
    (quote
-    (yafolding winum tide typescript-mode flycheck sql-indent python-x folding pug-mode powershell simple-httpd json-snatcher json-reformat jinja2-mode isend-mode dash-functional parent-mode epl haml-mode go-guru gitignore-mode flx ghub let-alist evil goto-chg eval-in-repl paredit ctable elpy find-file-in-project company ivy diminish bind-map bind-key packed ansible-doc ansible pythonic avy popup tern powerline spinner hydra request skewer-mode org highlight dash anzu go-mode magit-popup async f js2-mode undo-tree s web-mode persp-mode org-plus-contrib neotree js2-refactor help-fns+ helm-themes helm-pydoc helm-descbinds helm-ag evil-unimpaired ace-jump-helm-line ess iedit smartparens projectile helm markdown-mode magit git-commit yasnippet yapfify yaml-mode ws-butler with-editor window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort popwin pkg-info pip-requirements pcre2el paradox orgit org-bullets open-junk-file multiple-cursors move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode julia-mode json-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-css-scss helm-core google-translate golden-ratio go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu ess-smart-equals ess-R-object-popup ess-R-data-view emmet-mode elisp-slime-nav dumb-jump define-word cython-mode csv-mode column-enforce-mode coffee-mode clean-aindent-mode auto-highlight-symbol auto-compile anaconda-mode aggressive-indent adaptive-wrap ace-window ace-link)))
+    (xclip treepy graphql yafolding winum tide typescript-mode flycheck sql-indent python-x folding pug-mode powershell simple-httpd json-snatcher json-reformat jinja2-mode isend-mode dash-functional parent-mode epl haml-mode go-guru gitignore-mode flx ghub let-alist evil goto-chg eval-in-repl paredit ctable elpy find-file-in-project company ivy diminish bind-map bind-key packed ansible-doc ansible pythonic avy popup tern powerline spinner hydra request skewer-mode org highlight dash anzu go-mode magit-popup async f js2-mode undo-tree s web-mode persp-mode org-plus-contrib neotree js2-refactor help-fns+ helm-themes helm-pydoc helm-descbinds helm-ag evil-unimpaired ace-jump-helm-line ess iedit smartparens projectile helm markdown-mode magit git-commit yasnippet yapfify yaml-mode ws-butler with-editor window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort popwin pkg-info pip-requirements pcre2el paradox orgit org-bullets open-junk-file multiple-cursors move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode julia-mode json-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-css-scss helm-core google-translate golden-ratio go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu ess-smart-equals ess-R-object-popup ess-R-data-view emmet-mode elisp-slime-nav dumb-jump define-word cython-mode csv-mode column-enforce-mode coffee-mode clean-aindent-mode auto-highlight-symbol auto-compile anaconda-mode aggressive-indent adaptive-wrap ace-window ace-link)))
  '(spacemacs-theme-custom-colors
    (quote
     ((base . "#cccccc")
