@@ -278,7 +278,8 @@ in `dotspacemacs/user-config'."
   (global-set-key (kbd "C-e") 'end-of-line)
   (progn(require 'comint)
         (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
-        (define-key comint-mode-map (kbd "<down>") 'comint-next-input))
+        (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
+        (define-key comint-mode-map (kbd "M-k") 'comint-clear-buffer))
 )
 
 (defun dotspacemacs/user-config ()
