@@ -39,6 +39,7 @@ values."
      ess
      git
      markdown
+     osx
      ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -341,15 +342,17 @@ layers configuration. You are free to put any user code."
 
   ;; user keys
   (bind-key (kbd "M-/") 'comment-or-uncomment-region-or-line)
-  (setq mac-option-key-is-meta nil
-        mac-option-key-is-control nil
-        mac-command-key-is-meta t
-        mac-command-modifier 'meta ; make cmd key do Meta
-        mac-option-key-is-super t
-        mac-option-modifier 'super ; make opt key do Super
-        mac-control-modifier 'control ; make Control key do Control
-        ns-function-modifier 'hyper ; make Fn key do Hyper
-        )
+  ;; (setq mac-option-key-is-meta nil
+  ;;       mac-option-key-is-control nil
+  ;;       mac-command-key-is-meta t
+  ;;       mac-command-modifier 'meta ; make cmd key do Meta
+  ;;       mac-option-key-is-super t
+  ;;       mac-option-modifier 'super ; make opt key do Super
+  ;;       mac-control-modifier 'control ; make Control key do Control
+  ;;       ns-function-modifier 'hyper ; make Fn key do Hyper
+  ;; )
+
+  (evil-leader/set-key "/" 'spacemacs/helm-project-do-ag-region-or-symbol)
 
   ;; yafolding key binding
   (require 'yafolding)
