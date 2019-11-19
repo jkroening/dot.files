@@ -271,13 +271,19 @@ in `dotspacemacs/user-config'."
   ;; (setq mouse-wheel-scroll-amount '(3 ((shift). 1))) ;; one line at a time
   ;; (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
   ;; window jumping
-  (global-set-key (kbd "s-1") 'select-window-1)
-  (global-set-key (kbd "s-2") 'select-window-2)
-  (global-set-key (kbd "s-3") 'select-window-3)
+  (global-set-key (kbd "s-1") nil)
+  (global-set-key (kbd "s-2") nil)
+  (global-set-key (kbd "s-3") nil)
+  (global-set-key (kbd "s-1") 'winum-select-window-1)
+  (global-set-key (kbd "s-2") 'winum-select-window-2)
+  (global-set-key (kbd "s-3") 'winum-select-window-3)
   (global-set-key (kbd "C-a") nil)
   (global-set-key (kbd "C-a") 'beginning-of-line-text)
   (global-set-key (kbd "C-e") nil)
   (global-set-key (kbd "C-e") 'end-of-line)
+  (global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
+  (global-set-key (kbd "s-k") nil)
+  (global-set-key (kbd "s-k") 'comint-clear-buffer)
   (progn(require 'comint)
         (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
         (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
