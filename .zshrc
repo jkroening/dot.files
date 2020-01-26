@@ -15,6 +15,7 @@ compinit
 ## aliases
 alias tronmode='osascript ~/.dot.files/zsh-themes/term-theme.scpt TronTerm'
 alias thematrix='osascript ~/.dot.files/zsh-themes/term-theme.scpt "The Matrix"'
+alias promode='osascript ~/.dot.files/zsh-themes/term-theme.scpt "Pro Mode"'
 alias lsk='ls -hoag'
 
 # tabtab source for electron-forge package

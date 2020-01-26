@@ -39,6 +39,7 @@ values."
      ess
      git
      markdown
+     osx
      ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -58,6 +59,7 @@ values."
                                       isend-mode
                                       python-x
                                       xclip
+                                      ripgrep
                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -206,7 +208,7 @@ values."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -269,13 +271,19 @@ in `dotspacemacs/user-config'."
   ;; (setq mouse-wheel-scroll-amount '(3 ((shift). 1))) ;; one line at a time
   ;; (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
   ;; window jumping
-  (global-set-key (kbd "s-1") 'select-window-1)
-  (global-set-key (kbd "s-2") 'select-window-2)
-  (global-set-key (kbd "s-3") 'select-window-3)
+  (global-set-key (kbd "s-1") nil)
+  (global-set-key (kbd "s-2") nil)
+  (global-set-key (kbd "s-3") nil)
+  (global-set-key (kbd "s-1") 'winum-select-window-1)
+  (global-set-key (kbd "s-2") 'winum-select-window-2)
+  (global-set-key (kbd "s-3") 'winum-select-window-3)
   (global-set-key (kbd "C-a") nil)
   (global-set-key (kbd "C-a") 'beginning-of-line-text)
   (global-set-key (kbd "C-e") nil)
   (global-set-key (kbd "C-e") 'end-of-line)
+  (global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
+  (global-set-key (kbd "s-k") nil)
+  (global-set-key (kbd "s-k") 'comint-clear-buffer)
   (progn(require 'comint)
         (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
         (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
@@ -319,10 +327,14 @@ layers configuration. You are free to put any user code."
                                     (ess-indent-from-lhs arguments)
                                     (ess-indent-from-chain-start . t)
                                     (ess-indent-with-fancy-comments)
+                                    (ess-tab-complete-in-script t)
+                                    (ess-roxy-str "#'")
                                     ))
     (add-hook 'ess-mode-hook (lambda () (ess-set-style 'my-RStudio)))
     (ess-toggle-underscore nil)
     )
+
+  (setq ess-tab-complete-in-script t)
 
   (setq js2-basic-offset 4)
   (setq sgml-basic-offset 4)
@@ -339,15 +351,17 @@ layers configuration. You are free to put any user code."
 
   ;; user keys
   (bind-key (kbd "M-/") 'comment-or-uncomment-region-or-line)
-  (setq mac-option-key-is-meta nil
-        mac-option-key-is-control nil
-        mac-command-key-is-meta t
-        mac-command-modifier 'meta ; make cmd key do Meta
-        mac-option-key-is-super t
-        mac-option-modifier 'super ; make opt key do Super
-        mac-control-modifier 'control ; make Control key do Control
-        ns-function-modifier 'hyper ; make Fn key do Hyper
-        )
+  ;; (setq mac-option-key-is-meta nil
+  ;;       mac-option-key-is-control nil
+  ;;       mac-command-key-is-meta t
+  ;;       mac-command-modifier 'meta ; make cmd key do Meta
+  ;;       mac-option-key-is-super t
+  ;;       mac-option-modifier 'super ; make opt key do Super
+  ;;       mac-control-modifier 'control ; make Control key do Control
+  ;;       ns-function-modifier 'hyper ; make Fn key do Hyper
+  ;; )
+
+  (evil-leader/set-key "/" 'spacemacs/helm-project-do-ag-region-or-symbol)
 
   ;; yafolding key binding
   (require 'yafolding)
@@ -408,16 +422,21 @@ layers configuration. You are free to put any user code."
  '(custom-safe-themes
    (quote
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
+ '(helm-ag-base-command "rg --no-heading --smart-case")
  '(package-selected-packages
    (quote
-    (xclip treepy graphql yafolding winum tide typescript-mode flycheck sql-indent python-x folding pug-mode powershell simple-httpd json-snatcher json-reformat jinja2-mode isend-mode dash-functional parent-mode epl haml-mode go-guru gitignore-mode flx ghub let-alist evil goto-chg eval-in-repl paredit ctable elpy find-file-in-project company ivy diminish bind-map bind-key packed ansible-doc ansible pythonic avy popup tern powerline spinner hydra request skewer-mode org highlight dash anzu go-mode magit-popup async f js2-mode undo-tree s web-mode persp-mode org-plus-contrib neotree js2-refactor help-fns+ helm-themes helm-pydoc helm-descbinds helm-ag evil-unimpaired ace-jump-helm-line ess iedit smartparens projectile helm markdown-mode magit git-commit yasnippet yapfify yaml-mode ws-butler with-editor window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort popwin pkg-info pip-requirements pcre2el paradox orgit org-bullets open-junk-file multiple-cursors move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode julia-mode json-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-css-scss helm-core google-translate golden-ratio go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu ess-smart-equals ess-R-object-popup ess-R-data-view emmet-mode elisp-slime-nav dumb-jump define-word cython-mode csv-mode column-enforce-mode coffee-mode clean-aindent-mode auto-highlight-symbol auto-compile anaconda-mode aggressive-indent adaptive-wrap ace-window ace-link)))
+    (tern reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl wgrep-helm lv transient xclip treepy graphql yafolding winum tide typescript-mode flycheck sql-indent python-x folding pug-mode powershell simple-httpd json-snatcher json-reformat jinja2-mode isend-mode dash-functional parent-mode epl haml-mode go-guru gitignore-mode flx ghub let-alist evil goto-chg eval-in-repl paredit ctable elpy find-file-in-project company ivy diminish bind-map bind-key packed ansible-doc ansible pythonic avy popup powerline spinner hydra request skewer-mode org highlight dash anzu go-mode magit-popup async f js2-mode undo-tree s web-mode persp-mode org-plus-contrib neotree js2-refactor help-fns+ helm-themes helm-pydoc helm-descbinds helm-ag evil-unimpaired ace-jump-helm-line ess iedit smartparens projectile helm markdown-mode magit git-commit yasnippet yapfify yaml-mode ws-butler with-editor window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort popwin pkg-info pip-requirements pcre2el paradox orgit org-bullets open-junk-file multiple-cursors move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode julia-mode json-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-css-scss helm-core google-translate golden-ratio go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu ess-smart-equals ess-R-object-popup ess-R-data-view emmet-mode elisp-slime-nav dumb-jump define-word cython-mode csv-mode column-enforce-mode coffee-mode clean-aindent-mode auto-highlight-symbol auto-compile anaconda-mode aggressive-indent adaptive-wrap ace-window ace-link)))
+ '(spacemacs-theme-comment-bg nil)
  '(spacemacs-theme-custom-colors
    (quote
-    ((base . "#cccccc")
-     (bg1 . "#1c1e20")
-     (bg2 . "#17161a")
+    ((base . "#dddddd")
+     ;; (bg1 . "#1c1e20")
+     (bg1 . "#141317")
+     ;; (bg2 . "#17161a")
+     (bg2 . "#100f12")
      (bg4 . "#5d4e79")
-     (comment-bg . "#171e26")))))
+     ;; (comment-bg . "#141317")
+     ))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -429,32 +448,26 @@ layers configuration. You are free to put any user code."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
- '(custom-safe-themes
-   (quote
-    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
- '(package-selected-packages
-   (quote
-    (helm-R helm-ag-r helm-ack sql-indent tern powerline spinner hydra request skewer-mode org highlight dash anzu go-mode magit-popup async f js2-mode undo-tree s web-mode persp-mode org-plus-contrib neotree js2-refactor help-fns+ helm-themes helm-pydoc helm-descbinds helm-ag evil-unimpaired ace-jump-helm-line ess iedit smartparens projectile helm markdown-mode magit git-commit yasnippet yapfify yaml-mode ws-butler with-editor window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort popwin pkg-info pip-requirements pcre2el paradox orgit org-bullets open-junk-file multiple-cursors move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode julia-mode json-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-css-scss helm-core google-translate golden-ratio go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu ess-smart-equals ess-R-object-popup ess-R-data-view emmet-mode elisp-slime-nav dumb-jump define-word cython-mode csv-mode column-enforce-mode coffee-mode clean-aindent-mode auto-highlight-symbol auto-compile anaconda-mode aggressive-indent adaptive-wrap ace-window ace-link)))
- '(spacemacs-theme-custom-colors
-   (quote
-    ((base . "#cccccc")
-     (bg1 . "#1c1e20")
-     (bg2 . "#17161a")
-     (bg4 . "#5d4e79")
-     (comment-bg . "#171e26")))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(ansi-color-faces-vector
+     [default default default italic underline success warning error])
+   '(ansi-color-names-vector
+     ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
+   '(custom-safe-themes
+     (quote
+      ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
+   '(package-selected-packages
+     (quote
+      (helm-R helm-ag-r helm-ack sql-indent powerline spinner hydra request skewer-mode org highlight dash anzu go-mode magit-popup async f js2-mode undo-tree s web-mode persp-mode org-plus-contrib neotree js2-refactor help-fns+ helm-themes helm-pydoc helm-descbinds helm-ag evil-unimpaired ace-jump-helm-line ess iedit smartparens projectile helm markdown-mode magit git-commit yasnippet yapfify yaml-mode ws-butler with-editor window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort popwin pkg-info pip-requirements pcre2el paradox orgit org-bullets open-junk-file multiple-cursors move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode julia-mode json-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-css-scss helm-core google-translate golden-ratio go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu ess-smart-equals ess-R-object-popup ess-R-data-view emmet-mode elisp-slime-nav dumb-jump define-word cython-mode csv-mode column-enforce-mode coffee-mode clean-aindent-mode auto-highlight-symbol auto-compile anaconda-mode aggressive-indent adaptive-wrap ace-window ace-link)))
+   )
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   )
+  )
