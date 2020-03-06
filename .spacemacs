@@ -372,6 +372,10 @@ layers configuration. You are free to put any user code."
   (define-key yafolding-mode-map (kbd "<M-s-return>") 'yafolding-hide-parent-element)
   (define-key yafolding-mode-map (kbd "<s-return>") 'yafolding-toggle-element)
 
+  ;; ediff
+  (setq ediff-force-faces t)
+  (setq ediff-highlight-all-diffs t)
+
   ;; user functions
   (defun comment-or-uncomment-region-or-line ()
     "Comments or uncomments the region or the current line if there's no active region."
