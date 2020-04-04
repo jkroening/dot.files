@@ -340,7 +340,7 @@ layers configuration. You are free to put any user code."
   (setq sgml-basic-offset 4)
   (setq js2-jsx-indent-line 4)
 
-  (setq python-shell-interpreter "python27")
+  (setq python-shell-interpreter "python")
   (python-x-setup)
   (global-set-key (kbd "C-<return>") (lambda () (interactive) (python-shell-send-line) (next-line)))
 
