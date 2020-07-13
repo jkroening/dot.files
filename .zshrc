@@ -20,7 +20,7 @@ antibody bundle < ~/.dot.files/.zsh_plugins.txt
 [[ -f /Users/jonathan.kroening/Repos/qnr/interface/electron/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/jonathan.kroening/Repos/qnr/interface/electron/node_modules/tabtab/.completions/electron-forge.zsh
 
 ## aliases
-alias tronmode='osascript ~/.dot.files/zsh-themes/term-theme.scpt TronTerm'
+alias tronmode='osascript ~/.dot.files/zsh-themes/term-theme.scpt Mootron'
 alias thematrix='osascript ~/.dot.files/zsh-themes/term-theme.scpt "The Matrix"'
 alias promode='osascript ~/.dot.files/zsh-themes/term-theme.scpt "Pro Mode"'
 alias lsk='ls -hoag'

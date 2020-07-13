@@ -1,4 +1,11 @@
-~*
 .DS_Store
+~*
+*.Rhistory
+*.Rproj.user
+*.Ruserdata
+*.pyc
+*.pyo
+*.pyd
+*.vscode
+*sql.log
 *.jnl
-.Rhistory
