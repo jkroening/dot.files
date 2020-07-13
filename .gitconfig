@@ -3,6 +3,8 @@
 	email = jonathan.kroening@ipsos.com
 [push]
 	default = simple
+[pull]
+        rebase = false
 [alias]
         lg = log --graph --oneline --decorate --format=format:'%C(cyan)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
         lga = log --graph --oneline --decorate --format=format:'%C(cyan)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all ^origin/git-annex git-annex..master
@@ -41,6 +43,6 @@
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [color "branch"]
-    current = yellow reverse
-    local = yellow
-    remote = green
+        current = yellow reverse
+        local = yellow
+        remote = green
