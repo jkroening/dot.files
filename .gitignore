@@ -6,6 +6,5 @@
 *.pyc
 *.pyo
 *.pyd
-*.vscode
 *sql.log
 *.jnl
