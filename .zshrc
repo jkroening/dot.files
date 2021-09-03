@@ -26,3 +26,9 @@ alias promode='osascript ~/.dot.files/zsh-themes/term-theme.scpt "Pro Mode"'
 alias lsk='ls -hoag'
 alias git='git '
 alias nearest='show-branch | sed "s/].*//" | grep "\\*" | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -n1 | sed "s/^.*\\[//"'
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/jonathan.kroening/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jonathan.kroening/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/jonathan.kroening/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jonathan.kroening/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
