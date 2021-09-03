@@ -129,5 +129,9 @@
 	{
 		"key": "ctrl+`",
 		"command": "workbench.action.terminal.toggleTerminal"
+	},
+	{
+		"key": "cmd+enter",
+		"command": "workbench.action.terminal.runSelectedText"
 	}
 ]
