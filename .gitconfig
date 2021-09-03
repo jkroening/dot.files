@@ -21,6 +21,8 @@
           	git --no-pager diff --shortstat;\
       	done;"
 	cfg = config -l --local
+	gc = gc
+	branchclean = !git remote prune origin && git branch --merged >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches
 [merge]
 	tool = emerge
 [filter "gitignore"]
@@ -46,3 +48,8 @@
         current = yellow reverse
         local = yellow
         remote = green
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
