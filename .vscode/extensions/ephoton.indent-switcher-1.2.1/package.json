@@ -1,0 +1,52 @@
+{
+	"name": "indent-switcher",
+	"displayName": "indent-switcher",
+	"description": "Switch indentations from 4 spaces to 2 spaces, or 2 to 4.",
+	"version": "1.2.1",
+	"publisher": "ephoton",
+	"icon": "images/icon.png",
+	"repository": "https://github.com/ephoton/indent-switcher",
+	"engines": {
+		"vscode": "^1.17.0"
+	},
+	"categories": [
+		"Formatters",
+		"Linters"
+	],
+	"activationEvents": [
+		"onCommand:indentSwitcher.si4to2",
+		"onCommand:indentSwitcher.si2to4"
+	],
+	"main": "./out/extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "indentSwitcher.si4to2",
+				"title": "Switch indentations from 4 spaces to 2 spaces"
+			},
+			{
+				"command": "indentSwitcher.si2to4",
+				"title": "Switch indentations from 2 spaces to 4 spaces"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^3.0.1",
+		"vscode": "^1.1.21",
+		"@types/node": "^10.7.1",
+		"@types/mocha": "^5.2.5"
+	},
+	"__metadata": {
+		"id": "916bc534-f7e4-4017-959e-38be4f996e43",
+		"publisherId": "ae836e75-8d38-41fd-8fb2-85cdac9ee12d",
+		"publisherDisplayName": "ephoton",
+		"installedTimestamp": 1630102265078
+	}
+}
