@@ -15,6 +15,8 @@ compinit
 source <(antibody init)
 antibody bundle < ~/.dot.files/.zsh_plugins.txt
 
+ZSH_THEME=~/.dot.files/zsh-themes/jkroen.zsh-theme
+
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
 [[ -f /Users/jonathan.kroening/Repos/qnr/interface/electron/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/jonathan.kroening/Repos/qnr/interface/electron/node_modules/tabtab/.completions/electron-forge.zsh
