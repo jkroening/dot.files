@@ -8,3 +8,9 @@ export PATH=$GOPATH/bin:$PATH
 
 ## python
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
+## shell command completion for google sdk
+if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'; fi
+
+## PATH for gcloud sdk
+if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'; fi
