@@ -27,6 +27,7 @@
 	cfg = config -l --local
 	gc = gc
 	branchclean = "!git remote prune origin && git branch --merged | grep -v \"main\\|master\\|develop*\\|staging\" >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches"
+	mergeignore = "!f() { git merge --no-ff --no-commit $1; for ((i = 2; i <= $#; i++)) do echo 'Ignoring '${!i}; git reset HEAD ${!i} && git checkout -- ${!i}; done; while true; do read -p 'Commit this merge (y/n)? ' yn; case $yn in [Yy]* ) git commit; break;; [Nn]* ) exit;; * ) echo 'Please answer yes or no.';; esac; done; }; f"
 [merge]
 	tool = emerge
 [filter "gitignore"]
@@ -57,3 +58,5 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[merge "ours"]
+	driver = true
