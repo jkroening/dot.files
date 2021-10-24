@@ -26,7 +26,7 @@
       	done;"
 	cfg = config -l --local
 	gc = gc
-	branchclean = !git remote prune origin && git branch --merged >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches
+	branchclean = "!git remote prune origin && git branch --merged | grep -v \"main\\|master\\|develop*\\|staging\" >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches"
 [merge]
 	tool = emerge
 [filter "gitignore"]
