@@ -1,5 +1,5 @@
 ## Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+export ZSH="$HOME/.oh-my-zsh"
 
 ## savreaderwriter setup
 export DYLD_LIBRARY_PATH=/usr/local/Cellar/python/3.7.6_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/savReaderWriter/spssio/macos
