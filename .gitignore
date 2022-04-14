@@ -8,4 +8,4 @@
 *.pyd
 *sql.log
 *.jnl
-*.vscode
+.vscode
