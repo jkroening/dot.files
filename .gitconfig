@@ -40,13 +40,15 @@
 	editor = vim
 	excludesfile = /Users/jonathan.kroening/.dot.files/.gitignore
 [credential]
-	helper = osxkeychain
+	helper = manager-core
+[credential "https://dev.azure.com"]
+	useHttpPath = true
 [annex]
 	addunlocked = true
 	version = 6
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
@@ -56,3 +58,5 @@
         remote = green
 [merge "ours"]
 	driver = true
+[commit]
+	gpgsign = true
