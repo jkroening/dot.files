@@ -12,6 +12,7 @@
 [alias]
 	lg = log --graph --oneline --decorate --format=format:'%C(cyan)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
 	lga = log --graph --oneline --decorate --format=format:'%C(cyan)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all ^origin/git-annex git-annex..master
+	sm = submodule
 	st = status
 	co = checkout
 	cm = commit
@@ -28,7 +29,7 @@
 	branchclean = "!git remote prune origin && git branch --merged | grep -v \"main\\|master\\|develop*\\|staging\" >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches"
 	mergeignore = "!f() { git merge --no-ff --no-commit $1; for ((i = 2; i <= $#; i++)) do echo 'Ignoring '${!i}; git reset HEAD ${!i} && git checkout -- ${!i}; done; while true; do read -p 'Commit this merge (y/n)? ' yn; case $yn in [Yy]* ) git commit; break;; [Nn]* ) exit;; * ) echo 'Please answer yes or no.';; esac; done; }; f"
 	nearest = 'show-branch | sed "s/].*//" | grep "\\*" | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -n1 | sed "s/^.*\\[//"'
-	tagdel = push --delete origin
+	tagdel = "!f() { git push --delete origin $1; git tag -d $1; }; f"
 [merge]
 	tool = emerge
 [filter "gitignore"]
@@ -60,3 +61,8 @@
 	driver = true
 [commit]
 	gpgsign = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
