@@ -1,5 +1,8 @@
 export PATH=/usr/local/bin:$PATH
 
+## alias r for radian (improved R console)
+alias r="radian"
+
 ## Go
 export GOPATH=~/Repos/go/
 export PATH=$GOPATH/packages/bin:$PATH
