@@ -1,0 +1,145 @@
+{
+    "vim.easymotion": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                " "
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                " "
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                " "
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                " "
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                "<space>"
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                " "
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                " "
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                " "
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                " "
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                "<space>"
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        }
+    ],
+    "vim.handleKeys": {
+        "<C-c>": false,
+        "<C-v>": false,
+        "<D-c>": false
+    },
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "vim.useSystemClipboard": true,
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": true,
+    "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",<>/?",
+    "typescript.format.enable": false,
+    "python.pythonPath": "/usr/local/bin/python3",
+    "files.associations": {
+        "*.rmd": "markdown",
+        "*.R": "r"
+    },
+    "r.rpath.mac": "/usr/local/bin/R",
+    "r.lsp.args": [],
+    "r.bracketedPaste": true,
+    "vspacecode.bindingOverrides": [
+        {
+            "keys": "/",
+            "name": "Search in project with selection",
+            "type": "commands",
+            "commands": [
+                "editor.action.addSelectionToNextFindMatch",
+                "workbench.action.findInFiles"
+            ]
+        },
+        {
+            "keys": "*",
+            "position": -1,
+        }
+        // {
+        //     "key": "*",
+        //     "name": "Search in project with selection",
+        //     "type": "command",
+        //     "bindings": [
+        //         {
+        //             "key": "/",
+        //             "name": "Search in project with selection",
+        //             "type": "commands",
+        //             "commands": [
+        //                 "editor.action.addSelectionToNextFindMatch",
+        //                 "workbench.action.findInFiles"
+        //             ]
+        //         }
+        //     ]
+        // }
+    ],
+    "r.linting.lineLength": true,
+    "[json]": {
+        "editor.defaultFormatter": "HookyQR.beautify"
+    },
+    "editor.minimap.enabled": false,
+    "window.zoomLevel": 0,
+    "editor.quickSuggestions": null
+}
