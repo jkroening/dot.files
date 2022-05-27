@@ -1,1 +1,2 @@
 options(radian.color_scheme = "monokai")
+source("./.Rprofile")
