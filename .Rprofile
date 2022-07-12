@@ -6,22 +6,11 @@ tbl <- function(...) {
     print(tab)
     invisible(tab)
 }
-source("/Users/jonathan.kroening/Desktop/custom-linters.R")
 
 ## LanguageServer Setup Start (do not change this chunk)
 ## to remove this, run languageserversetup::remove_from_rprofile
-if (requireNamespace('languageserversetup', quietly = TRUE)) {
-    options(
-        langserver_library = '/Users/jonathan.kroening/.dot.files/languageserver-library'
-    )
+if (requireNamespace("languageserversetup", quietly = TRUE)) {
     languageserversetup::languageserver_startup()
-    unloadNamespace('languageserversetup')
+    unloadNamespace("languageserversetup")
 }
 ## LanguageServer Setup End
-
-## linting
-options(languageserver.formatting_style = function(options) {
-    style <- styler::tidyverse_style(indent_by = options$tabSize)
-    style$token$set_space_between_open_bracket_and_comma <- set_space_between_open_bracket_and_comma()
-    style
-})
