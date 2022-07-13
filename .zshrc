@@ -27,6 +27,13 @@ alias thematrix='osascript ~/.dot.files/zsh-themes/term-theme.scpt "The Matrix"'
 alias promode='osascript ~/.dot.files/zsh-themes/term-theme.scpt "Pro Mode"'
 alias lsk='ls -hoag'
 alias git='git '
+alias restart='exec zsh -l'
+alias watchibn='export AZURE_OPENID=`cat ~/Dropbox/Work/keys/ibn.txt`; lsof -ti :8000 | xargs kill -9; yarn run watch'
+
+# node
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/jonathan.kroening/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jonathan.kroening/Downloads/google-cloud-sdk/path.zsh.inc'; fi
@@ -37,3 +44,8 @@ if [ -f '/Users/jonathan.kroening/Downloads/google-cloud-sdk/completion.zsh.inc'
 ## remove some git aliases zsh created
 unalias g
 unalias gc
+
+## keyboard shortcuts
+function killwebpack() { lsof -ti :8000 | xargs kill -9; pkill -f webpack-dev-server; pkill -f node; tput reset; builtin zle .redisplay; compinit -i; }
+zle -N killwebpack
+bindkey '^x' killwebpack
