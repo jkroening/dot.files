@@ -1,10 +1,12 @@
 [user]
 	name = Jonathan Kroening
 	email = jonathan.kroening@ipsos.com
+[url "github-ipsos:gso-lab/"]
+	insteadOf = git@github.com:gso-lab/
 [url "github-ipsos:ipsos-code-collaboratory/"]
 	insteadOf = git@github.com:ipsos-code-collaboratory/
 [url "github-personal:jkroening/"]
-        insteadOf = git@github.com:jkroening/
+	insteadOf = git@github.com:jkroening/
 [push]
 	default = simple
 [pull]
