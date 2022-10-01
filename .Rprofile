@@ -1,7 +1,6 @@
 ## options(warnPartialMatchArgs = TRUE)
 tbl <- function(...) {
-    tab <- table(..., exclude = NULL)
-    dimnames(tab) <- unname(dimnames(tab))
+    tab <- addmargins(table(..., exclude = NULL))
     cat("\n")
     print(tab)
     invisible(tab)
