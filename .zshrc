@@ -46,6 +46,6 @@ unalias g
 unalias gc
 
 ## keyboard shortcuts
-function killwebpack() { lsof -ti :8000 | xargs kill -9; pkill -f webpack-dev-server; pkill -f node; tput reset; builtin zle .redisplay; compinit -i; }
+function killwebpack() { lsof -ti :8000 | xargs kill -9; pkill -f webpack-dev-server; pgrep -f webpack | xargs kill -9; builtin zle .redisplay; compinit -i; }
 zle -N killwebpack
 bindkey '^x' killwebpack
