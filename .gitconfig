@@ -9,6 +9,7 @@
 	insteadOf = git@github.com:jkroening/
 [push]
 	default = simple
+	autoSetupRemote = true
 [pull]
         rebase = false
 [alias]
@@ -32,6 +33,7 @@
 	mergeignore = "!f() { git merge --no-ff --no-commit $1; for ((i = 2; i <= $#; i++)) do echo 'Ignoring '${!i}; git reset HEAD ${!i} && git checkout -- ${!i}; done; while true; do read -p 'Commit this merge (y/n)? ' yn; case $yn in [Yy]* ) git commit; break;; [Nn]* ) exit;; * ) echo 'Please answer yes or no.';; esac; done; }; f"
 	nearest = 'show-branch | sed "s/].*//" | grep "\\*" | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -n1 | sed "s/^.*\\[//"'
 	tagdel = "!f() { git push --delete origin $1; git tag -d $1; }; f"
+	pushempty = "!f() { git commit --allow-empty -m 'Empty commit.'; git push; }; f"
 [merge]
 	tool = emerge
 [filter "gitignore"]
