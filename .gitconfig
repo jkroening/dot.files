@@ -1,6 +1,7 @@
 [user]
 	name = Jonathan Kroening
 	email = jonathan.kroening@ipsos.com
+	signingkey = EB978D8DF1B6610D
 [url "github-ipsos:gso-lab/"]
 	insteadOf = git@github.com:gso-lab/
 [url "github-ipsos:ipsos-code-collaboratory/"]
