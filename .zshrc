@@ -29,6 +29,8 @@ alias lsk='ls -hoag'
 alias git='git '
 alias restart='exec zsh -l'
 alias watchibn='export AZURE_OPENID=`cat ~/Dropbox/Work/keys/ibn.txt`; lsof -ti :8000 | xargs kill -9; yarn run watch'
+alias cdibn='~/Repos/ibn/ibn'
+alias cdibntests='~/Repos/ibn/ibn/IBN/tests/target'
 
 # node
 export NVM_DIR="$HOME/.nvm"

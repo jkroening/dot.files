@@ -6,6 +6,8 @@ tbl <- function(...) {
     invisible(tab)
 }
 
+ibn <- "~/Repos/ibn/ibn/IBN"
+
 ## LanguageServer Setup Start (do not change this chunk)
 ## to remove this, run languageserversetup::remove_from_rprofile
 if (requireNamespace("languageserversetup", quietly = TRUE)) {
