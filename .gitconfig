@@ -47,6 +47,7 @@
 	excludesfile = /Users/jonathan.kroening/.dot.files/.gitignore
 [credential]
 	helper = manager-core
+	helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
 	useHttpPath = true
 [annex]
